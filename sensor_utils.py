@@ -9,7 +9,7 @@ def read_soil_moisture(soil_power_pin: Pin, soil_analog: ADC) -> int:
     sleep(0.5)
     moisture_analog = soil_analog.read_u16()
     soil_power_pin.value(0)
-    return round((moisture_analog / 65535) * 100)
+    return round(((65535 - moisture_analog) / 65535) * 100)
 
 def read_dht_sensor(d_internal: DHT11) -> tuple[int, int]:
     """Measure and return temperature and humidity from the DHT11 sensor."""
