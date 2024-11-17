@@ -1,6 +1,8 @@
 import network
+import config
 from socket import socket, getaddrinfo
 from time import sleep
+import urequests
 
 def connect_to_wifi(ssid: str, password: str) -> network.WLAN:
     """Connect to Wi-Fi using provided SSID and password."""
@@ -9,7 +11,8 @@ def connect_to_wifi(ssid: str, password: str) -> network.WLAN:
     wlan.disconnect()
     wlan.connect(ssid, password)
     while not wlan.isconnected():
-        sleep(1)
+        print("Connecting to Wi-FI")
+        sleep(5)
     print("Connected to Wi-Fi")
     print("Network config:", wlan.ifconfig())
     return wlan
@@ -23,3 +26,17 @@ def ping_google():
         s.close()
     except OSError as e:
         print("Unable to connect to Google:", e)
+
+def check_server() -> tuple[bool, int]:
+    """Retrieve `activate` and `seconds` variables from the server for the `activate_relay` function"""
+    try:
+        print(f'{config.base_url}{config.api_url}{config.command_endpoint}')
+        response = urequests.get(f'{config.base_url}{config.api_url}{config.command_endpoint}')
+        data = response.json()
+        response.close()
+        activate = data.get('activate', False)
+        seconds = data.get('seconds', 0)
+        return activate, seconds
+    except Exception as e:
+        print("Error checking server:", e)
+        return False, 0
