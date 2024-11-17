@@ -21,3 +21,9 @@ def send_data(url: str, data: dict[str, int]) -> None:
     headers = {"Content-Type": "application/json"}
     response = urequests.post(url, json=data, headers=headers)
     response.close()
+
+def activate_relay(relay_pin: Pin, seconds: int) -> None:
+    """Activate relay for `seconds` seconds"""
+    relay_pin.on()
+    sleep(seconds)
+    relay_pin.off()
