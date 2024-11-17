@@ -1,4 +1,6 @@
 ssid = "YOUR_SSID"
 password = "YOUR_PASSWORD"
 base_url = "http://example.com"
-api_url = "/api/data/"
+api_url = "/api"
+data_endpoint = "/data" # endpoint to which Pico sends data
+command_endpoint = "/command" # endpoint from which Pico receives a command
