@@ -1,6 +1,7 @@
 ssid = "YOUR_SSID"
 password = "YOUR_PASSWORD"
+device_id = "DEVICE_ID_NUMBER"
 base_url = "http://example.com"
 api_url = "/api"
 data_endpoint = "/data" # endpoint to which Pico sends data
-command_endpoint = "/command" # endpoint from which Pico receives a command
+command_endpoint = f"/command?device_id={device_id}" # endpoint from which Pico receives a command

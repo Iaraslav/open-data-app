@@ -21,17 +21,19 @@ def main() -> None:
             print(f"Seconds {seconds}")
             if activate:
                 activate_relay(pump_relay_pin, int(seconds))
-            sleep(5)
+            sleep(1)
             data = {
                 "temperature": temp,
+                "moisture": moisture,
                 "humidity": humidity,
-                "moisture": moisture
+                "device_id": config.device_id
             }
+            print(data)
             try:
                 send_data(f"{config.base_url}{config.api_url}{config.data_endpoint}", data)
             except Exception as e:
                 print("Failed to send data:", e)
-            sleep(1)
+            sleep(5)
             
     except Exception as e:
         print(e)

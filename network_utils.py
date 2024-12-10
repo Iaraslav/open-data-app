@@ -27,7 +27,7 @@ def ping_google():
     except OSError as e:
         print("Unable to connect to Google:", e)
 
-def check_server() -> tuple[bool, int]:
+def get_pump_command() -> tuple[bool, int]:
     """Retrieve `activate` and `seconds` variables from the server for the `activate_relay` function"""
     try:
         print(f'{config.base_url}{config.api_url}{config.command_endpoint}')
